@@ -11,10 +11,10 @@ export default class CustomDocument extends Document {
       <Html lang="en">
         <Head />
         <body>
-        <Main />
-        <NextScript />
+          <Main />
+          <NextScript />
         </body>
       </Html>
     );
   }
-};
+}
