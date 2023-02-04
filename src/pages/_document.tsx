@@ -6,15 +6,15 @@ const getInitialProps = createGetInitialProps();
 export default class CustomDocument extends Document {
   static getInitialProps = getInitialProps;
 
-  render() {
+  render(): JSX.Element {
     return (
       <Html lang="en">
         <Head />
         <body>
-        <Main />
-        <NextScript />
+          <Main />
+          <NextScript />
         </body>
       </Html>
     );
   }
-};
+}
