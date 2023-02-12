@@ -23,6 +23,11 @@ export const fetchGitHubAccount: FetchGitHubAccount = async (dto) => {
     headers,
   };
 
+  // 検証の為 `error` という名前で検索するとエラーが発生するようにする
+  if (dto.name === 'error') {
+    throw new Error('GitHubAccount Not Found');
+  }
+
   const response = await fetch(
     `https://api.github.com/users/${dto.name}`,
     options
