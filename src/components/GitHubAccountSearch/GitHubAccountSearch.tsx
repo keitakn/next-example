@@ -1,27 +1,39 @@
-import type { FC, ChangeEventHandler } from 'react';
-import { TextInput, Text } from '@mantine/core';
-import { useDebouncedState } from '@mantine/hooks';
+import { useState, type FC } from 'react';
+import { TextInput, Button, Group, Box } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { fetchGitHubAccount } from '@/api/client/fetch/github';
+import type { GitHubAccount } from '@/features';
 
 export const GitHubAccountSearch: FC = () => {
-  const [inputGitHubAccount, setInputGitHubAccount] = useDebouncedState(
-    '',
-    200
-  );
+  const form = useForm({
+    initialValues: { inputGitHubAccountName: 'keitakn' },
+  });
 
-  const handleChangeText: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setInputGitHubAccount(event.currentTarget.value);
-  };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [gitHubAccount, setGitHubAccount] = useState<GitHubAccount>();
+
+  const onSubmit = form.onSubmit(async (values) => {
+    const inputGitHubAccountName = values.inputGitHubAccountName;
+
+    const fetchedGitHubAccount = await fetchGitHubAccount({
+      name: inputGitHubAccountName,
+    });
+
+    setGitHubAccount(fetchedGitHubAccount);
+  });
 
   return (
-    <>
-      <TextInput
-        label="GitHubのAccount名を入力して下さい。"
-        defaultValue={inputGitHubAccount}
-        style={{ flex: 1 }}
-        onChange={handleChangeText}
-      />
-
-      <Text>GitHubAccount: {inputGitHubAccount}</Text>
-    </>
+    <Box sx={{ maxWidth: 300 }} mx="auto">
+      <form method="post" onSubmit={onSubmit}>
+        <TextInput
+          withAsterisk
+          label="GitHubのAccount名を入力して下さい。"
+          {...form.getInputProps('inputGitHubAccountName')}
+        />
+        <Group position="right" mt="md">
+          <Button type="submit">Submit</Button>
+        </Group>
+      </form>
+    </Box>
   );
 };
