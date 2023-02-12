@@ -1,4 +1,9 @@
 import type { FetchGitHubAccount } from '@/features';
+import {
+  FetchGitHubAccountError,
+  GitHubAccountNotFoundError,
+  httpStatusCode,
+} from '@/features';
 
 // https://api.github.com/users/USERNAME のResponseBody
 // 必要な項目だけ定義している
@@ -25,13 +30,19 @@ export const fetchGitHubAccount: FetchGitHubAccount = async (dto) => {
 
   // 検証の為 `error` という名前で検索するとエラーが発生するようにする
   if (dto.name === 'error') {
-    throw new Error('GitHubAccount Not Found');
+    throw new FetchGitHubAccountError();
   }
 
   const response = await fetch(
     `https://api.github.com/users/${dto.name}`,
     options
   );
+
+  if (response.status !== httpStatusCode.ok) {
+    if (httpStatusCode.notFound) {
+      throw new GitHubAccountNotFoundError();
+    }
+  }
 
   const responseBody = (await response.json()) as GitHubFetchUserResponse;
 

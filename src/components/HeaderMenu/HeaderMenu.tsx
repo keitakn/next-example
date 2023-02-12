@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Menu, Button } from '@mantine/core';
 import Link from 'next/link';
-import {appUrls} from '@/features';
+import { appUrls } from '@/features';
 
 export const HeaderMenu: FC = () => {
   return (
