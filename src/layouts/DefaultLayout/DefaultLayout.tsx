@@ -2,7 +2,7 @@ import type { FC, ReactNode } from 'react';
 import { Container } from '@mantine/core';
 import Head from 'next/head';
 import { ErrorBoundary } from 'react-error-boundary';
-import { TitleText } from '@/components';
+import { HeaderMenu, TitleText } from '@/components';
 import { ErrorFallback } from '@/components/ErrorFallback/ErrorFallback';
 
 type Props = {
@@ -26,6 +26,7 @@ export const DefaultLayout: FC<Props> = ({ children }) => (
     </Head>
     <Container my="md">
       <TitleText title="Next Sample App" />
+      <HeaderMenu />
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={onError}>
         {children}
       </ErrorBoundary>

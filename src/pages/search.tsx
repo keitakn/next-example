@@ -1,13 +1,8 @@
 import type { NextPage } from 'next';
-import { GitHubAccountSearch } from '@/components';
-import { DefaultLayout } from '@/layouts';
+import { GitHubAccountSearchTemplate } from '@/templates';
 
 const SearchPage: NextPage = () => {
-  return (
-    <DefaultLayout>
-      <GitHubAccountSearch />
-    </DefaultLayout>
-  );
+  return <GitHubAccountSearchTemplate />;
 };
 
 export default SearchPage;
