@@ -1,4 +1,11 @@
-import type { FetchGitHubAccount, GitHubAccount } from '@/features';
+import type { FetchGitHubAccount } from '@/features';
+
+// https://api.github.com/users/USERNAME のResponseBody
+// 必要な項目だけ定義している
+type GitHubFetchUserResponse = {
+  login: string;
+  avatar_url: string;
+};
 
 export const fetchGitHubAccount: FetchGitHubAccount = async (dto) => {
   const headers: HeadersInit =
@@ -21,7 +28,10 @@ export const fetchGitHubAccount: FetchGitHubAccount = async (dto) => {
     options
   );
 
-  const responseBody = (await response.json()) as GitHubAccount;
+  const responseBody = (await response.json()) as GitHubFetchUserResponse;
 
-  return responseBody;
+  return {
+    name: responseBody.login,
+    avatarUrl: responseBody.avatar_url,
+  };
 };
