@@ -1,13 +1,12 @@
-import { Container } from '@mantine/core';
 import type { NextPage } from 'next';
-import { GitHubAccountSearch, TitleText } from '@/components';
+import { GitHubAccountSearch } from '@/components';
+import { DefaultLayout } from '@/layouts';
 
 const SearchPage: NextPage = () => {
   return (
-    <Container my="md">
-      <TitleText title="Next Sample App" />
+    <DefaultLayout>
       <GitHubAccountSearch />
-    </Container>
+    </DefaultLayout>
   );
 };
 

@@ -1,13 +1,12 @@
-import { Grid, Skeleton, Container } from '@mantine/core';
+import { Grid, Skeleton } from '@mantine/core';
 import type { NextPage } from 'next';
-import { TitleText } from '@/components';
+import { DefaultLayout } from '@/layouts';
 
 const child = <Skeleton height={140} radius="md" animate={false} />;
 
 const IndexPage: NextPage = () => {
   return (
-    <Container my="md">
-      <TitleText title="Next Sample App" />
+    <DefaultLayout>
       <Grid>
         <Grid.Col xs={4}>{child}</Grid.Col>
         <Grid.Col xs={8}>{child}</Grid.Col>
@@ -17,7 +16,7 @@ const IndexPage: NextPage = () => {
         <Grid.Col xs={3}>{child}</Grid.Col>
         <Grid.Col xs={6}>{child}</Grid.Col>
       </Grid>
-    </Container>
+    </DefaultLayout>
   );
 };
 
