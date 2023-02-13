@@ -1,9 +1,6 @@
 import { z } from 'zod';
 import type { FetchGitHubAccount } from '@/features';
-import {
-  GitHubAccountNotFoundError,
-  httpStatusCode,
-} from '@/features';
+import { GitHubAccountNotFoundError, httpStatusCode } from '@/features';
 
 // https://api.github.com/users/USERNAME のResponseBody
 // 必要な項目だけ定義している
