@@ -44,6 +44,7 @@ export const fetchGitHubAccount: FetchGitHubAccount = async (dto) => {
     }
   }
 
+  // TODO zodでバリデーションする処理を追加する
   const responseBody = (await response.json()) as GitHubFetchUserResponse;
 
   return {
