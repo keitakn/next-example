@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import type { FetchGitHubAccount } from '@/features';
 import {
-  FetchGitHubAccountError,
   GitHubAccountNotFoundError,
   httpStatusCode,
 } from '@/features';
@@ -33,11 +32,6 @@ export const fetchGitHubAccount: FetchGitHubAccount = async (dto) => {
     cache: 'no-cache',
     headers,
   };
-
-  // 検証の為 `error` という名前で検索するとエラーが発生するようにする
-  if (dto.name === 'error') {
-    throw new FetchGitHubAccountError();
-  }
 
   const response = await fetch(
     `https://api.github.com/users/${dto.name}`,
