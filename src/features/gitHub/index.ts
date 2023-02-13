@@ -1,2 +1,2 @@
-export type { FetchGitHubAccount, GitHubAccount } from './github';
+export type { FetchGitHubAccount, GitHubAccount } from './gitHub';
 export { GitHubAccountNotFoundError } from './GitHubAccountNotFoundError';

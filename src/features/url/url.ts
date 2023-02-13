@@ -1,4 +1,4 @@
-const appUrlIdList = ['top', 'githubAccountSearch'] as const;
+const appUrlIdList = ['top', 'gitHubAccountSearch'] as const;
 
 type AppUrlId = (typeof appUrlIdList)[number];
 
@@ -22,7 +22,7 @@ export const appUrls: AppUrls = {
     path: '/',
     name: 'トップ',
   },
-  githubAccountSearch: {
+  gitHubAccountSearch: {
     path: '/search',
     name: 'GitHubAccount検索',
   },

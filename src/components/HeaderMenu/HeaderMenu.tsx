@@ -17,8 +17,8 @@ export const HeaderMenu: FC = () => {
           </Link>
         </Menu.Item>
         <Menu.Item>
-          <Link href={appUrls.githubAccountSearch.path} prefetch={false}>
-            {appUrls.githubAccountSearch.name}
+          <Link href={appUrls.gitHubAccountSearch.path} prefetch={false}>
+            {appUrls.gitHubAccountSearch.name}
           </Link>
         </Menu.Item>
       </Menu.Dropdown>

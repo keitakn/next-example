@@ -2,7 +2,7 @@ import { useState, type FC } from 'react';
 import { TextInput, Button, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useErrorHandler } from 'react-error-boundary';
-import { fetchGitHubAccount } from '@/api/client/fetch/github';
+import { fetchGitHubAccount } from '@/api/client/fetch/gitHub';
 import type { GitHubAccount } from '@/features';
 import { GitHubAccountCard } from './GitHubAccountCard';
 
