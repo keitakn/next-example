@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import type { FetchGitHubAccount } from '@/features';
 import {
   FetchGitHubAccountError,
@@ -7,10 +8,15 @@ import {
 
 // https://api.github.com/users/USERNAME のResponseBody
 // 必要な項目だけ定義している
-type GitHubFetchUserResponse = {
+type FetchGitHubAccountResponseBody = {
   login: string;
   avatar_url: string;
 };
+
+const fetchGitHubAccountResponseBodySchema = z.object({
+  login: z.string().min(1),
+  avatar_url: z.string().url(),
+});
 
 export const fetchGitHubAccount: FetchGitHubAccount = async (dto) => {
   const headers: HeadersInit =
@@ -44,8 +50,11 @@ export const fetchGitHubAccount: FetchGitHubAccount = async (dto) => {
     }
   }
 
-  // TODO zodでバリデーションする処理を追加する
-  const responseBody = (await response.json()) as GitHubFetchUserResponse;
+  // fetchGitHubAccountResponseBodySchema.parse() に失敗した場合例外がThrowされるのでここで型アサーションを使っても型安全は保証されている
+  const responseBody =
+    (await response.json()) as FetchGitHubAccountResponseBody;
+
+  fetchGitHubAccountResponseBodySchema.parse(responseBody);
 
   return {
     name: responseBody.login,
