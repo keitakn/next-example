@@ -1,8 +1,12 @@
 import 'whatwg-fetch';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import { ZodError } from 'zod';
 import { fetchGitHubAccount } from '@/api/client/fetch/gitHub';
-import { mockFetchGitHubAccount } from '@/mocks';
+import {
+  mockFetchGitHubAccount,
+  mockFetchGitHubAccountUnexpectedResponseBody,
+} from '@/mocks';
 
 const mockHandlers = [
   rest.get('https://api.github.com/users/dummy', mockFetchGitHubAccount),
@@ -35,5 +39,21 @@ describe('src/api/client/fetch/gitHub.ts fetchGitHubAccount TestCases', () => {
     };
 
     expect(fetchedGitHubAccount).toStrictEqual(expected);
+  });
+
+  it('should ZodError Throw, because unexpected response body', async () => {
+    mockServer.use(
+      rest.get(
+        'https://api.github.com/users/dummy',
+        mockFetchGitHubAccountUnexpectedResponseBody
+      )
+    );
+
+    const dto = {
+      name: 'dummy',
+      accessToken: '',
+    };
+
+    await expect(fetchGitHubAccount(dto)).rejects.toThrowError(ZodError);
   });
 });
