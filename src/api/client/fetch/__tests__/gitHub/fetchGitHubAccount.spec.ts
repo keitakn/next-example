@@ -3,9 +3,11 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { ZodError } from 'zod';
 import { fetchGitHubAccount } from '@/api/client/fetch/gitHub';
+import { GitHubAccountNotFoundError } from '@/features';
 import {
   mockFetchGitHubAccount,
   mockFetchGitHubAccountUnexpectedResponseBody,
+  mockNotFoundError,
 } from '@/mocks';
 
 const mockHandlers = [
@@ -39,6 +41,21 @@ describe('src/api/client/fetch/gitHub.ts fetchGitHubAccount TestCases', () => {
     };
 
     expect(fetchedGitHubAccount).toStrictEqual(expected);
+  });
+
+  it('should GitHubAccountNotFoundError Throw, because GitHubAccount not found', async () => {
+    mockServer.use(
+      rest.get('https://api.github.com/users/dummy', mockNotFoundError)
+    );
+
+    const dto = {
+      name: 'dummy',
+      accessToken: '',
+    };
+
+    await expect(fetchGitHubAccount(dto)).rejects.toThrowError(
+      GitHubAccountNotFoundError
+    );
   });
 
   it('should ZodError Throw, because unexpected response body', async () => {
