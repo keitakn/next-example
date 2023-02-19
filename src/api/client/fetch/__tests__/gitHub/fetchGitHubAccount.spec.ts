@@ -53,7 +53,7 @@ describe('src/api/client/fetch/gitHub.ts fetchGitHubAccount TestCases', () => {
       accessToken: '',
     };
 
-    await expect(fetchGitHubAccount(dto)).rejects.toThrowError(
+    await expect(fetchGitHubAccount(dto)).rejects.toThrow(
       GitHubAccountNotFoundError
     );
   });
@@ -71,6 +71,6 @@ describe('src/api/client/fetch/gitHub.ts fetchGitHubAccount TestCases', () => {
       accessToken: '',
     };
 
-    await expect(fetchGitHubAccount(dto)).rejects.toThrowError(ZodError);
+    await expect(fetchGitHubAccount(dto)).rejects.toThrow(ZodError);
   });
 });
