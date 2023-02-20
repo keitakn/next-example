@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: Test And Linter
     runs-on: ubuntu-latest
     strategy:
       matrix:
