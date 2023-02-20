@@ -1,5 +1,7 @@
 # next-example
 
+[![ci](https://github.com/keitakn/next-example/actions/workflows/ci.yml/badge.svg)](https://github.com/keitakn/next-example/actions/workflows/ci.yml)
+
 Next.js の検証用サンプルプロジェクト、長期メンテナンスは行わない予定。このプロジェクトでは app ディレクトリは使わない。
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
