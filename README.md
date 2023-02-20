@@ -1,6 +1,7 @@
 # next-example
 
 [![ci](https://github.com/keitakn/next-example/actions/workflows/ci.yml/badge.svg)](https://github.com/keitakn/next-example/actions/workflows/ci.yml)
+[![chromatic](https://github.com/keitakn/next-example/actions/workflows/chromatic.yml/badge.svg)](https://github.com/keitakn/next-example/actions/workflows/chromatic.yml)
 
 Next.js の検証用サンプルプロジェクト、長期メンテナンスは行わない予定。このプロジェクトでは app ディレクトリは使わない。
 
