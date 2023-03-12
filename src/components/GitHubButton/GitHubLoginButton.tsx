@@ -2,7 +2,7 @@ import type { FC, ComponentPropsWithoutRef } from 'react';
 import { Button } from '@mantine/core';
 import { FaGithub } from 'react-icons/fa';
 
-export const GitHubButton: FC<ComponentPropsWithoutRef<'button'>> = ({
+export const GitHubLoginButton: FC<ComponentPropsWithoutRef<'button'>> = ({
   onClick,
 }) => {
   return (

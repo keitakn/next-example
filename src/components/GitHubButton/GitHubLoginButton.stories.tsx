@@ -1,20 +1,20 @@
 import type { ComponentStoryObj } from '@storybook/react';
-import { GitHubButton } from '.';
+import { GitHubLoginButton } from '.';
 
 const story = {
-  component: GitHubButton,
+  component: GitHubLoginButton,
 };
 
 export default story;
 
-type Story = ComponentStoryObj<typeof GitHubButton>;
+type Story = ComponentStoryObj<typeof GitHubLoginButton>;
 
 export const Default: Story = {};
 
 export const WithHandleOnClick: Story = {
   args: {
     onClick: () => {
-      console.log('clicked GitHubButton');
+      console.log('clicked GitHubLoginButton');
     },
   },
 };
