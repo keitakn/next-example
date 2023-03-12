@@ -7,7 +7,7 @@ export const GitHubButton: FC<ComponentPropsWithoutRef<'button'>> = ({
 }) => {
   return (
     <Button color="dark" leftIcon={<FaGithub />} onClick={onClick} size="xl">
-      Sign in with GitHub
+      GitHubでログイン
     </Button>
   );
 };
