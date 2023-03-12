@@ -6,7 +6,11 @@ const appUrlPathList = ['/', '/search', '/login'] as const;
 
 type AppUrlPath = (typeof appUrlPathList)[number];
 
-export const appUrlNameList = ['トップ', 'GitHubAccount検索', 'ログイン'] as const;
+export const appUrlNameList = [
+  'トップ',
+  'GitHubAccount検索',
+  'ログイン',
+] as const;
 
 type AppUrlName = (typeof appUrlNameList)[number];
 
