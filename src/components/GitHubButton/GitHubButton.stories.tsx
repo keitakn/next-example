@@ -10,3 +10,9 @@ export default story;
 type Story = ComponentStoryObj<typeof GitHubButton>;
 
 export const Default: Story = {};
+
+export const WithHandleOnClick: Story = {
+  args: {
+    onClick: () => { console.log('clicked GitHubButton'); },
+  },
+};
