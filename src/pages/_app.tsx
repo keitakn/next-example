@@ -1,10 +1,14 @@
 import { MantineProvider } from '@mantine/core';
 import { type AppProps } from 'next/app';
 import Head from 'next/head';
-
+import type { Session } from 'next-auth/core/types';
+import { SessionProvider } from 'next-auth/react';
 const App = (props: AppProps): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { Component, pageProps } = props;
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { session } = pageProps;
 
   return (
     <>
@@ -15,16 +19,20 @@ const App = (props: AppProps): JSX.Element => {
         />
       </Head>
 
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: 'light',
-        }}
-      >
-        <Component {...pageProps} />
-      </MantineProvider>
+      <SessionProvider session={session as Session}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            /** Put your mantine theme override here */
+            colorScheme: 'light',
+          }}
+        >
+          <SessionProvider session={session as Session}>
+            <Component {...pageProps} />
+          </SessionProvider>
+        </MantineProvider>
+      </SessionProvider>
     </>
   );
 };
