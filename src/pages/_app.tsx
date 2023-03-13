@@ -19,18 +19,20 @@ const App = (props: AppProps): JSX.Element => {
         />
       </Head>
 
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          /** Put your mantine theme override here */
-          colorScheme: 'light',
-        }}
-      >
-        <SessionProvider session={session as Session}>
-          <Component {...pageProps} />
-        </SessionProvider>
-      </MantineProvider>
+      <SessionProvider session={session as Session}>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            /** Put your mantine theme override here */
+            colorScheme: 'light',
+          }}
+        >
+          <SessionProvider session={session as Session}>
+            <Component {...pageProps} />
+          </SessionProvider>
+        </MantineProvider>
+      </SessionProvider>
     </>
   );
 };
