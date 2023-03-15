@@ -6,7 +6,6 @@ import NextAuth, {
 } from 'next-auth';
 import type { JWT } from 'next-auth/jwt/types';
 import GithubProvider from 'next-auth/providers/github';
-import * as console from "console";
 
 export const authOptions: NextAuthOptions = {
   providers: [
