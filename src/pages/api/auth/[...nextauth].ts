@@ -30,10 +30,7 @@ export const authOptions: NextAuthOptions = {
       token: JWT;
       // eslint-disable-next-line @typescript-eslint/require-await
     }) => {
-      session.appToken = jwt.sign(
-        { id: token.sub },
-        String(process.env.NEXTAUTH_SECRET)
-      );
+      session.appToken = jwt.sign(token, String(process.env.NEXTAUTH_SECRET));
 
       return session;
     },
