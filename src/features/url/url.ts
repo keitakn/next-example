@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 const appUrlIdList = ['top', 'gitHubAccountSearch', 'login'] as const;
 
 type AppUrlId = (typeof appUrlIdList)[number];
@@ -34,4 +36,26 @@ export const appUrls: AppUrls = {
     path: '/login',
     name: 'ログイン',
   },
+};
+
+type AppUrl = `http://localhost:${string}` | `https://${string}`;
+
+const isAppUrl = (value: unknown): value is AppUrl => {
+  const schema = z.string().url();
+
+  try {
+    schema.parse(value);
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const appUrl = (): AppUrl => {
+  if (isAppUrl(process.env.NEXT_PUBLIC_APP_URL)) {
+    return process.env.NEXT_PUBLIC_APP_URL;
+  }
+
+  return 'http://localhost:3000';
 };
