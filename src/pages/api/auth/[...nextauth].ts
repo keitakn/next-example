@@ -6,6 +6,7 @@ import NextAuth, {
 } from 'next-auth';
 import type { JWT } from 'next-auth/jwt/types';
 import GithubProvider from 'next-auth/providers/github';
+import { isOidcProvider } from '@/features';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -33,6 +34,17 @@ export const authOptions: NextAuthOptions = {
       session.appToken = jwt.sign(token, String(process.env.NEXTAUTH_SECRET));
 
       return session;
+    },
+    // eslint-disable-next-line @typescript-eslint/require-await
+    jwt: async ({ token, account }) => {
+      if (account) {
+        if (isOidcProvider(account.provider)) {
+          token.accessToken = account.access_token;
+          token.provider = account.provider;
+        }
+      }
+
+      return token;
     },
   },
 };
