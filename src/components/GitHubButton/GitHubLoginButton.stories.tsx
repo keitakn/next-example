@@ -1,13 +1,13 @@
-import type { ComponentStoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { GitHubLoginButton } from '.';
 
-const story = {
+const meta: Meta = {
   component: GitHubLoginButton,
 };
 
-export default story;
+export default meta;
 
-type Story = ComponentStoryObj<typeof GitHubLoginButton>;
+type Story = StoryObj<typeof GitHubLoginButton>;
 
 export const Default: Story = {};
 
