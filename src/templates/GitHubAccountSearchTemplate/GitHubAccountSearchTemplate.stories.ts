@@ -1,4 +1,4 @@
-import type { ComponentStoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { rest } from 'msw';
 import {
   mockFetchGitHubAccount,
@@ -7,13 +7,13 @@ import {
 } from '@/mocks';
 import { GitHubAccountSearchTemplate } from '@/templates';
 
-const story = {
+const meta: Meta = {
   component: GitHubAccountSearchTemplate,
 };
 
-export default story;
+export default meta;
 
-type Story = ComponentStoryObj<typeof GitHubAccountSearchTemplate>;
+type Story = StoryObj<typeof GitHubAccountSearchTemplate>;
 
 export const Default: Story = {
   parameters: {

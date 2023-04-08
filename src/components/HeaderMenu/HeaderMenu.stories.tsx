@@ -1,12 +1,12 @@
-import type { ComponentStoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { HeaderMenu } from './HeaderMenu';
 
-const story = {
+const meta: Meta = {
   component: HeaderMenu,
 };
 
-export default story;
+export default meta;
 
-type Story = ComponentStoryObj<typeof HeaderMenu>;
+type Story = StoryObj<typeof HeaderMenu>;
 
 export const Default: Story = {};

@@ -1,13 +1,13 @@
-import type { ComponentStoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { GitHubAccountCard } from './GitHubAccountCard';
 
-const story = {
+const meta: Meta = {
   component: GitHubAccountCard,
 };
 
-export default story;
+export default meta;
 
-type Story = ComponentStoryObj<typeof GitHubAccountCard>;
+type Story = StoryObj<typeof GitHubAccountCard>;
 
 export const Default: Story = {
   args: {
