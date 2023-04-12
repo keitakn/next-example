@@ -1,7 +1,7 @@
 import { useState, type FC } from 'react';
 import { TextInput, Button, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useErrorHandler } from 'react-error-boundary';
+import { useErrorBoundary } from 'react-error-boundary';
 import { fetchGitHubAccount } from '@/api/client/fetch/gitHub';
 import type { GitHubAccount } from '@/features';
 import { GitHubAccountCard } from './GitHubAccountCard';
@@ -14,7 +14,7 @@ export const GitHubAccountSearch: FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [gitHubAccount, setGitHubAccount] = useState<GitHubAccount>();
 
-  const handleError = useErrorHandler();
+  const { showBoundary } = useErrorBoundary();
 
   const onSubmit = form.onSubmit(async (values) => {
     try {
@@ -26,7 +26,7 @@ export const GitHubAccountSearch: FC = () => {
 
       setGitHubAccount(fetchedGitHubAccount);
     } catch (error) {
-      handleError(error);
+      showBoundary(error);
     }
   });
 
