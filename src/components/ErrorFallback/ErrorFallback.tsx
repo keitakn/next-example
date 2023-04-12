@@ -9,7 +9,7 @@ export const ErrorFallback: FC<FallbackProps> = ({
 }) => {
   return (
     <>
-      <ErrorMessage error={error} />
+      {error instanceof Error ? <ErrorMessage error={error} /> : ''}
       <Button onClick={resetErrorBoundary}>もう一度試す</Button>
     </>
   );

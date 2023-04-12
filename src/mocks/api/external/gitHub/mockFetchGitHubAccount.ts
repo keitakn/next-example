@@ -8,8 +8,8 @@ import { httpStatusCode } from '@/features';
 export const mockFetchGitHubAccount: ResponseResolver<
   MockedRequest,
   typeof restContext
-> = (req, res, ctx) =>
-  res(
+> = async (req, res, ctx) =>
+  await res(
     ctx.status(httpStatusCode.ok),
     ctx.json({
       login: 'keitakn',
