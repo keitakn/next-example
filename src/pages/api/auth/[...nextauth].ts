@@ -6,7 +6,7 @@ import NextAuth, {
 } from 'next-auth';
 import type { JWT } from 'next-auth/jwt/types';
 import GithubProvider from 'next-auth/providers/github';
-import { isOidcProvider } from '@/features';
+import { appUrls, isOidcProvider } from '@/features';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -22,6 +22,10 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    redirect: async ({ baseUrl }) => {
+      return `${baseUrl}${appUrls.gitHubAccountSearch.path}`;
+    },
     session: async ({
       session,
       token,
@@ -31,7 +35,17 @@ export const authOptions: NextAuthOptions = {
       token: JWT;
       // eslint-disable-next-line @typescript-eslint/require-await
     }) => {
-      session.appToken = jwt.sign(token, String(process.env.NEXTAUTH_SECRET));
+      if (token.sub != null && token.provider != null) {
+        session.appToken = jwt.sign(
+          {
+            sub: token.sub,
+            provider: token.provider,
+            exp: token.exp,
+            jti: token.jti,
+          },
+          String(process.env.APP_TOKEN_SECRET_KEY)
+        );
+      }
 
       return session;
     },
@@ -39,8 +53,11 @@ export const authOptions: NextAuthOptions = {
     jwt: async ({ token, account }) => {
       if (account) {
         if (isOidcProvider(account.provider)) {
-          token.accessToken = account.access_token;
           token.provider = account.provider;
+        }
+
+        if (account.access_token != null) {
+          token.accessToken = account.access_token;
         }
       }
 
