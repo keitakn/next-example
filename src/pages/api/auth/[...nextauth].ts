@@ -39,8 +39,11 @@ export const authOptions: NextAuthOptions = {
     jwt: async ({ token, account }) => {
       if (account) {
         if (isOidcProvider(account.provider)) {
-          token.accessToken = account.access_token;
           token.provider = account.provider;
+        }
+
+        if (account.access_token != null) {
+          token.accessToken = account.access_token;
         }
       }
 
