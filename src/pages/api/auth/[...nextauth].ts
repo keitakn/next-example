@@ -6,7 +6,7 @@ import NextAuth, {
 } from 'next-auth';
 import type { JWT } from 'next-auth/jwt/types';
 import GithubProvider from 'next-auth/providers/github';
-import { isOidcProvider } from '@/features';
+import { appUrls, isOidcProvider } from '@/features';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -22,6 +22,10 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    redirect: async ({ baseUrl }) => {
+      return `${baseUrl}${appUrls.gitHubAccountSearch.path}`;
+    },
     session: async ({
       session,
       token,
